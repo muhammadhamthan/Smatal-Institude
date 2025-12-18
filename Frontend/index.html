@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smatal Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./static/style.css" />
+  <script src="./static/script.js" defer></script>
+  <link rel="icon" href="favicon.ico">
+</head>
+<body>
+
+<button class="chatbot-button" id="chatbot-btn" aria-label="Open chatbot">
+  <img src="./static/Logo.jpeg" alt="Samtal Academy Logo" class="chatbot-button-avatar" />
+  <span class="ask">Ask Samtal</span>
+</button>
+
+<div class="chat-popup" id="chat-popup" role="dialog" aria-modal="true" aria-labelledby="chatbot-title">
+  <div class="chat-header">
+    <div class="header-left">
+      <img class="header-avatar" src="./static/Logo.jpeg" alt="Samtal Academy Logo" />
+      <div class="header-titles">
+        <h3 id="chatbot-title" class="title-org">Smatal Academy</h3>
+        <p class="subtitle"><span class="status-dot" aria-hidden="true"></span> Online • Your Learning Assistant</p>
+      </div>
+    </div>
+    <div class="chat-controls">
+      <button id="refresh-btn" class="icon-btn" title="Refresh" aria-label="Refresh">
+        <i class="fa-solid fa-rotate"></i>
+      </button>
+      <button id="close-btn" class="icon-btn" title="Close" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+  <div class="chat-body" id="chat-body">
+    <div id="quick-courses" class="courses-grid" aria-label="Quick course categories">
+      <button class="course-card green" data-prompt="Python course details">
+        <i class="fa-solid fa-code card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">Python</span>
+          <span class="course-sub">Master Python programming</span>
+        </div>
+      </button>
+      <button class="course-card blue" data-prompt="Data Science course details">
+        <i class="fa-solid fa-chart-line card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">Data Science</span>
+          <span class="course-sub">Learn data analysis & ML</span>
+        </div>
+      </button>
+      <button class="course-card orange" data-prompt="Java course details">
+        <i class="fa-brands fa-java card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">Java</span>
+          <span class="course-sub">OOP, APIs, Spring basics</span>
+        </div>
+      </button>
+      <button class="course-card slate" data-prompt="MS Office course details">
+        <i class="fa-regular fa-file-lines card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">MS Office</span>
+          <span class="course-sub">Excel, Word, PowerPoint</span>
+        </div>
+      </button>
+      <button class="course-card emerald" data-prompt="Tally course details">
+        <i class="fa-solid fa-calculator card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">Tally</span>
+          <span class="course-sub">Accounting fundamentals</span>
+        </div>
+      </button>
+      <button class="course-card red" data-prompt="C/C++ course details">
+        <i class="fa-solid fa-cubes-stacked card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">C/C++</span>
+          <span class="course-sub">Systems programming</span>
+        </div>
+      </button>
+      <button class="course-card violet" data-prompt="PowerBI course details">
+        <i class="fa-solid fa-chart-pie card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">Power BI</span>
+          <span class="course-sub">Interactive dashboards</span>
+        </div>
+      </button>
+      <button class="course-card pink" data-prompt="Graphic Design course details">
+        <i class="fa-solid fa-pen-nib card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">Graphic Design</span>
+          <span class="course-sub">Adobe tools & layout</span>
+        </div>
+      </button>
+      <button class="course-card indigo" data-prompt="Video Editing course details">
+        <i class="fa-solid fa-film card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">Video Editing</span>
+          <span class="course-sub">Professional workflows</span>
+        </div>
+      </button>
+      <button class="course-card cyan" data-prompt="Data Analytics course details">
+        <i class="fa-solid fa-magnifying-glass-chart card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">Data Analytics</span>
+          <span class="course-sub">Advanced analytics</span>
+        </div>
+      </button>
+      <button class="course-card purple" data-prompt="Full Stack course details">
+        <i class="fa-solid fa-layer-group card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">Full Stack</span>
+          <span class="course-sub">Modern web development</span>
+        </div>
+      </button>
+      <button class="course-card gray" data-prompt="Cyber Security course details">
+        <i class="fa-solid fa-shield-halved card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">Cyber Security</span>
+          <span class="course-sub">Network & app security</span>
+        </div>
+      </button>
+      <button class="course-card amber" data-prompt="Digital Marketing course details">
+        <i class="fa-solid fa-bullhorn card-icon"></i>
+        <div class="card-text">
+          <span class="course-title">Digital Marketing</span>
+          <span class="course-sub">SEO & social media</span>
+        </div>
+      </button>
+    </div>
+    <div class="bot-message-wrapper">
+      <div class="bot-avatar"></div>
+      <div class="bot-message">Hi, how can I help you today?</div>
+    </div>
+  </div>
+  <div id="details-form-container"></div>
+
+  <template id="details-form-template">
+    <div class="details-form-message">
+      <h4>Get <span class="form-course-name"></span> Syllabus</h4>
+      
+      <div class="form-field">
+        <label for="user-name">
+          <span class="icon">👤</span>
+          Full Name
+        </label>
+        <input 
+          type="text" 
+          id="user-name" 
+          placeholder="John Doe" 
+          required
+          aria-label="Your full name"
+          pattern="[A-Za-z\s]{2,}"
+          title="Name must contain at least 2 characters and only letters"
+        >
+        <span class="error-message" id="name-error"></span>
+      </div>
+      
+      <div class="form-field">
+        <label for="user-email">
+          <span class="icon">✉️</span>
+          Email Address
+        </label>
+        <input 
+          type="email" 
+          id="user-email" 
+          placeholder="john@example.com"
+          required
+          aria-label="Your email address"
+          title="Please enter a valid email address (e.g., john@example.com)"
+        >
+        <span class="error-message" id="email-error"></span>
+      </div>
+      
+      <div class="form-field">
+        <label for="user-phone">
+          <span class="icon">📱</span>
+          Phone Number
+        </label>
+        <input 
+          type="text" 
+          id="user-phone" 
+          placeholder="9876543210" 
+          required
+          inputmode="numeric"
+          maxlength="10"
+          aria-label="Your phone number (10 digits)"
+          title="Phone must be exactly 10 digits starting with 6-9"
+        >
+        <span class="error-message" id="phone-error"></span>
+      </div>
+      
+      <button id="submit-details-btn" aria-label="Submit your details">
+        Get Syllabus
+      </button>
+    </div>
+  </template>
+
+  <div class="chat-footer">
+    <input type="text" id="chat-input" placeholder="Write your question..." autocomplete="off" />
+    <button id="send-btn" aria-label="Send">
+      <span>Send</span>
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
+  </div>
+  <div class="chat-footer-bottom">
+    &copy; <a target="_blank" href="https://blixittechnologies.com/" class="copy-right">Blixit Technologies</a> 2025 
+  </div>
+</div>
+
+</body>
+</html>

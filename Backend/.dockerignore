@@ -1,0 +1,33 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.github/
+.vscode/
+
+# Virtual environments
+.env
+.venv/
+.pytest_cache/
+
+.catalystrc
+
+*.json
+*.csv
+Samtal_bugs_notes.txt
+
+RAG.ipynb
+ipynb_checkpoints/
+
+.gitignore
+
+index.html
+static/
+
+testttt.py
+conftest.py
+
+tests/
+gene.py

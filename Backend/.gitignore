@@ -1,0 +1,18 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+env/
+.env
+
+.catalystrc
+
+*.json
+*.csv
+Samtal_bugs_notes.txt
+
+RAG.ipynb
+ipynb_checkpoints/
