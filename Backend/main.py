@@ -4,7 +4,7 @@
 
 import os
 from pathlib import Path
-from flask import Flask, request, jsonify, render_template,session
+from flask import Flask, request, jsonify,make_response,request
 from flask_cors import CORS
 from dotenv import load_dotenv
 load_dotenv()
@@ -18,12 +18,12 @@ app = Flask(
 )
 
 CORS(
-    app,
-    resources={r"/*": {"origins": "*"}}
+    app
 )
 
 user_submissions = set()
-#-------------- Flask routes --------------        
+#-------------- Flask routes --------------     
+   
 
 @app.route("/")
 def health():
@@ -32,6 +32,14 @@ def health():
 @app.route('/favicon.ico')
 def favicon():
     return '', 204
+
+@app.route("/chat", methods=["OPTIONS"])
+def chat_options():
+    response = make_response("", 204)
+    response.headers["Access-Control-Allow-Origin"] = request.headers.get("Origin")
+    response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    return response
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -82,7 +90,9 @@ def chat():
         #save memory after every message
         save_user_memory_to_redis(user_id,memory)
         #save_user_memory(user_id,memory)
-        return jsonify({'response': result})
+        final_response = jsonify({'response': result})
+        final_response.headers["Access-Control-Allow-Origin"] = request.headers.get("Origin")
+        return final_response
 
     except Exception as e:
         print("Error during model invocation:", str(e))

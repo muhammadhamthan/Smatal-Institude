@@ -103,7 +103,7 @@ refreshBtn.addEventListener("click", () => {
     localStorage.setItem("userId", userId)
   }
 
-  fetch("https://appsail-50035450095.development.catalystappsail.in/refresh", {
+  fetch("http://127.0.0.1:8080/refresh", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ user_id: userId }),
@@ -152,7 +152,7 @@ async function sendMessage() {
 
 
 
-    await fetch("https://appsail-50035450095.development.catalystappsail.in/chat", {
+    await fetch("http://127.0.0.1:8080/chat", {
       method: "POST",
       // credentials:"include",
       headers: { "Content-Type": "application/json" },
@@ -212,7 +212,7 @@ function openDetailsForm(course) {
     try {
       console.log("[v0] Submitting form with:", { name, email, phone, course: courseName, user_id })
 
-      const res = await fetch("https://appsail-50035450095.development.catalystappsail.in/submit_details", {
+      const res = await fetch("http://127.0.0.1:8080/submit_details", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phone, course: courseName, user_id }),

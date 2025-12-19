@@ -308,14 +308,19 @@ def get_qa_chain(retriever,memory,llm):
 
 def get_retriver():
     from langchain_community.vectorstores import FAISS
-    from langchain_huggingface import HuggingFaceEmbeddings
-    
-    instructor_embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-    
-    vectordb = FAISS.load_local("Samtal-Data-Vector",embeddings =instructor_embedding,allow_dangerous_deserialization=True)
-    retriver = vectordb.as_retriever()
-    
-    return retriver
+    from hf_api_embedding import HFInferenceEmbeddings
+
+    embeddings = HFInferenceEmbeddings()
+
+    vectordb = FAISS.load_local(
+        "Samtal-Data-Vector",
+        embeddings=embeddings,
+        allow_dangerous_deserialization=True
+    )
+
+    retriever = vectordb.as_retriever()
+    return retriever
+
 def new_memory():
     # from langchain.memory import ConversationSummaryBufferMemory
 
@@ -336,7 +341,7 @@ def new_memory():
         memory_key="chat_history",    
         input_key="question",       
         output_key="answer", 
-        k=4,  # last 4 turns only
+        k=3,  # last 4 turns only
         return_messages=True,
         document = True
     )
