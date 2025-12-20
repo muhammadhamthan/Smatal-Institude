@@ -8,22 +8,18 @@ from flask import Flask, request, jsonify,make_response,request
 from flask_cors import CORS
 from dotenv import load_dotenv
 load_dotenv()
-from syllabus_utils import detect_syllabus_request, syllabus_response
+#from syllabus_utils import detect_syllabus_request, syllabus_response
 from course_details import COURSES
 from google_sheet import append_row_to_sheet
 from redis_cache import get_user_memory_from_redis, save_user_memory_to_redis,redis_key_for_user,redis_client
+from Syllabus_fuzz_detection import detect_syllabus_request as detect_syllabus_request,syllabus_response
 
 app = Flask(
     __name__
 )
 
-CORS(
-    app
-)
-
 user_submissions = set()
 #-------------- Flask routes --------------     
-   
 
 @app.route("/")
 def health():
@@ -32,14 +28,6 @@ def health():
 @app.route('/favicon.ico')
 def favicon():
     return '', 204
-
-@app.route("/chat", methods=["OPTIONS"])
-def chat_options():
-    response = make_response("", 204)
-    response.headers["Access-Control-Allow-Origin"] = request.headers.get("Origin")
-    response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
-    return response
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -90,10 +78,7 @@ def chat():
         #save memory after every message
         save_user_memory_to_redis(user_id,memory)
         #save_user_memory(user_id,memory)
-        final_response = jsonify({'response': result})
-        final_response.headers["Access-Control-Allow-Origin"] = request.headers.get("Origin")
-        return final_response
-
+        return jsonify({'response': result})
     except Exception as e:
         print("Error during model invocation:", str(e))
         return jsonify({'response': "Sorry, I couldn't process your request54444."})
@@ -102,7 +87,9 @@ def chat():
 def refresh_chat():
     try:
         user_id = request.get_json().get("user_id")
-        redis_client.delete(redis_key_for_user(user_id))
+        deleted_key = redis_client.delete(redis_key_for_user(user_id))
+        print(f"Deleted key: {deleted_key}")
+
         
         return jsonify({
             "status": "success",

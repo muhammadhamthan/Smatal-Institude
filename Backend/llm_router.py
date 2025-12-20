@@ -8,12 +8,12 @@ from langchain_groq import ChatGroq
 
 # ---------------- CONFIG ---------------- #
 
-COOLDOWN_SECONDS = 60
+COOLDOWN_SECONDS = 3600  # 1 hour
 
 MODEL_CONFIG = [
     ("fast", "llama-3.3-70b-versatile"),
-    ("backup", "llama-3.1-8b-instant"),
-    ("last_resort", "gpt-oss-20b"),
+    ("backup", "meta-llama/llama-4-scout-17b-16e-instruct"),
+    ("last_resort", "moonshotai/kimi-k2-instruct-0905"),
 ]
 
 # ---------------- INIT ---------------- #

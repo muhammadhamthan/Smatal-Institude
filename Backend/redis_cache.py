@@ -7,7 +7,7 @@ from langchain_helper import new_memory
 url = os.environ.get('REDIS_URL',"")
 
 redis_client = redis.from_url(url,decode_responses=True)
-REDIS_TTL_SECONDS = 24 * 3600 # 24 hours Time To Live (User session expiry time in seconds)
+REDIS_TTL_SECONDS = 3600 # 1 hours Time To Live (User session expiry time in seconds)
 
 def serialize_messages(messages):
     out = []

@@ -19,7 +19,7 @@ __pycache__/
 Samtal_bugs_notes.txt
 
 RAG.ipynb
-ipynb_checkpoints/
+.ipynb_checkpoints/
 
 .gitignore
 
@@ -28,6 +28,7 @@ static/
 
 testttt.py
 conftest.py
+gene.py
 
 tests/
 gene.py

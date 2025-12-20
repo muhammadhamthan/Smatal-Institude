@@ -36,21 +36,49 @@ def detect_syllabus_request(user_message:str):
             Your main factor is time and accuracy detection.
             you have very limited time to detect within 2 to 3 seconds.
             You have to be very accurate in detecting the syllabus request.
-        
+        Role:
+            You are a intent detector AI    
         Task:
             Is to analyze user messages and determine if they are requesting a course syllabus from the smatal academy.
-            Example question can be:
-            1. "Can you provide the syllabus for the Python course?"
-            2. "I would like to see the course outline for Data Science."
-            3. "What topics are covered in the Java syllabus?"
-            4. "Show me the course content for Graphic Design."
-            And many more similar queries to detect the syllabus name.
-            5.You should only respond with JSON data as per the format below.
-            6.No extra text outside the JSON.
-            7.No explanations even about the json format or anything.
-            8.Ensure the JSON is properly formatted.
-            Important Note:
-                You have to detect as soon as possible within the 2 to 3 seconds with correct JSON format and also detect the course name correctly.
+            1.You should only respond with JSON data as per the format below.
+            2.No extra text outside the JSON.
+            3.No explanations even about the json format or anything.
+            4.Ensure the JSON is properly formatted.
+            5.Remember only detect the reponse then the question is about syllabus details not when the question is general about the course. 
+            
+            STRICT EXCLUSION RULE (VERY IMPORTANT):
+
+                DO NOT mark is_syllabus_request as true if the user is asking about:
+                    - difficulty level
+                    - prerequisites
+                    - how much math is required
+                    - eligibility
+                    - duration
+                    - fees
+                    - career scope
+                    - salary
+                    - job opportunities
+                    - whether the course is good or worth it
+                    - general explanation of the course
+                    - comparisons between courses
+
+                Examples that MUST return false:
+                    - "How much math is involved in data science?"
+                    - "Is Python easy or hard?"
+                    - "What is data science used for?"
+                    - "Is Java good for jobs?"
+                    - "Do I need math for AI?"
+                    - "Tell me about the data science course"
+                    - "Explain data science"
+
+                ONLY return true if the user is explicitly asking about:
+                    - syllabus
+                    - topics covered
+                    - course outline
+                    - modules
+                    - curriculum
+                    - course content
+                    - what is included in the course   
 
             If the user is requesting a syllabus, identify the specific course from the following list:
             {list(COURSES.keys())}
@@ -93,6 +121,15 @@ def detect_syllabus_request(user_message:str):
                 
         User Message: "{user_message}"
         Respond in JSON only.
+        
+        Examplers:
+                Example question can be:
+                    1. "Can you provide the syllabus for the Python course?"
+                    2. "I would like to see the course outline for Data Science."
+                    3. "What topics are covered in the Java syllabus?"
+                    4. "Show me the course content for Graphic Design."
+                    And many more similar queries to detect the syllabus name.
+
         """
     
     try:

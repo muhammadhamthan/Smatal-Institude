@@ -125,15 +125,15 @@ langchain-core>=0.3,<0.4
 langchain-text-splitters>=0.3,<0.4
 langchain-experimental>=0.3,<0.4
 
-langchain-google-community>=2,<3
-langchain-google-genai>=2,<3
-langchain-google-vertexai>=2,<3
-langchain-huggingface>=0.1,<0.2
+# langchain-google-community>=2,<3
+# langchain-google-genai>=2,<3
+# langchain-google-vertexai>=2,<3
+# langchain-huggingface>=0.1,<0.2
 langchain-groq==0.2.5
 
-torch==2.8.0+cpu 
---extra-index-url https://download.pytorch.org/whl/cpu
-sentence-transformers==5.0.0
+#torch==2.8.0+cpu 
+#--extra-index-url https://download.pytorch.org/whl/cpu
+#sentence-transformers==5.0.0
 huggingface-hub==0.33.4
 
 
@@ -148,9 +148,8 @@ gspread
 oauth2client
 
 redis
+rapidfuzz
+python-dotenv
 
-pytest
-pytest-mock
-
-# zcatalyst-cli
-zcatalyst-sdk
+#pytest
+#pytest-mock
