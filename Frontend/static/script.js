@@ -103,7 +103,7 @@ refreshBtn.addEventListener("click", () => {
     localStorage.setItem("userId", userId)
   }
 
-  fetch("https://smatal-institude.onrender.com/refresh", {
+  fetch("https://appsail-50035450095.development.catalystappsail.in/refresh", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ user_id: userId }),
@@ -152,7 +152,7 @@ async function sendMessage() {
 
 
 
-    await fetch("https://smatal-institude.onrender.com/chat", {
+    await fetch("https://appsail-50035450095.development.catalystappsail.in/chat", {
       method: "POST",
       // credentials:"include",
       headers: { "Content-Type": "application/json" },
@@ -212,7 +212,7 @@ function openDetailsForm(course) {
     try {
       console.log("[v0] Submitting form with:", { name, email, phone, course: courseName, user_id })
 
-      const res = await fetch("https://smatal-institude.onrender.com/submit_details", {
+      const res = await fetch("https://appsail-50035450095.development.catalystappsail.in/submit_details", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phone, course: courseName, user_id }),
