@@ -1035,6 +1035,9 @@ body {
 /* Force hide button when chat is open (backup to React logic) */
 .chat-open .chatbot-button {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* Responsive Design */
@@ -1053,6 +1056,18 @@ body {
     display: flex;
     flex-direction: column;
     box-shadow: 0 16px 40px rgba(2, 6, 23, 0.25);
+    z-index: 20000 !important;
+    /* Ensure it's on top of everything */
+  }
+
+  .chat-header {
+    padding: 16px;
+    /* Larger touch target area */
+  }
+
+  .chat-controls .icon-btn {
+    padding: 12px;
+    /* Larger touch target for buttons */
   }
 
   .details-popup {
@@ -1063,11 +1078,15 @@ body {
     right: auto;
     transform: translateX(-50%);
     border-radius: 18px;
+    z-index: 20001;
+    /* Above chat popup */
   }
 
   .chatbot-button {
     bottom: 20px;
     right: 20px;
+    z-index: 1000;
+    /* Lower than chat popup */
   }
 
   .courses-grid {
