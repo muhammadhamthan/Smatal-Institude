@@ -659,6 +659,7 @@ body {
 .icon-btn:active {
   background: rgba(162, 9, 239, 0.2);
   color: #fff;
+  transform: scale(0.95);
 }
 
 .chat-header .icon-btn {
