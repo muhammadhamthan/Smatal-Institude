@@ -644,10 +644,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.18s, box-shadow 0.18s;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
   color: #fff;
   /* Ensures icons show white on your purple header */
   font-size: 1.28em;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .icon-btn:hover {
@@ -657,9 +658,15 @@ body {
 }
 
 .icon-btn:active {
-  background: rgba(162, 9, 239, 0.2);
+  background: rgba(162, 9, 239, 0.4);
   color: #fff;
-  transform: scale(0.95);
+  transform: scale(0.9);
+}
+
+.icon-btn.pressed {
+  background: rgba(162, 9, 239, 0.4);
+  color: #fff;
+  transform: scale(0.9);
 }
 
 .chat-header .icon-btn {
