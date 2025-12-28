@@ -663,6 +663,10 @@ body {
   transform: scale(0.9);
 }
 
+.icon-btn.touched {
+  background: rgba(0, 0, 0, 0.3);
+}
+
 .chat-header .icon-btn {
   margin-left: 4px;
   margin-right: 0;

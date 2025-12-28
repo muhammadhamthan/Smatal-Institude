@@ -11,6 +11,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
     const [userId, setUserId] = useState('')
     const [showQuickCourses, setShowQuickCourses] = useState(true)
     const [detailsForm, setDetailsForm] = useState(null) // { course: '...' }
+    const [touchedButton, setTouchedButton] = useState(null) // 'refresh' or 'close'
     const chatBodyRef = useRef(null)
 
     useEffect(() => {
@@ -165,10 +166,22 @@ const ChatWindow = ({ isOpen, onClose }) => {
                     </div>
                 </div>
                 <div className="chat-controls">
-                    <button className="icon-btn" title="Refresh" onClick={handleRefresh}>
+                    <button 
+                        className={`icon-btn ${touchedButton === 'refresh' ? 'touched' : ''}`} 
+                        title="Refresh" 
+                        onClick={handleRefresh}
+                        onTouchStart={() => setTouchedButton('refresh')}
+                        onTouchEnd={() => { setTouchedButton(null); handleRefresh(); }}
+                    >
                         <i className="fa-solid fa-rotate"></i>
                     </button>
-                    <button className="icon-btn" title="Close" onClick={onClose}>
+                    <button 
+                        className={`icon-btn ${touchedButton === 'close' ? 'touched' : ''}`} 
+                        title="Close" 
+                        onClick={onClose}
+                        onTouchStart={() => setTouchedButton('close')}
+                        onTouchEnd={() => { setTouchedButton(null); onClose(); }}
+                    >
                         <i className="fa-solid fa-xmark"></i>
                     </button>
                 </div>
