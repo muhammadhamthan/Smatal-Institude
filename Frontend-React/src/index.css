@@ -63,6 +63,10 @@ body {
   transform: translateY(0px) scale(0.99);
 }
 
+.chatbot-button.pressed {
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
 .chatbot-button-avatar {
   width: 24px;
   /* consistent sizing */
@@ -664,9 +668,7 @@ body {
 }
 
 .icon-btn.pressed {
-  background: rgba(162, 9, 239, 0.4);
-  color: #fff;
-  transform: scale(0.9);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .chat-header .icon-btn {
