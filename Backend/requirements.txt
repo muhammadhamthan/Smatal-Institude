@@ -134,6 +134,8 @@ langchain-groq==0.2.5
 #torch==2.8.0+cpu 
 #--extra-index-url https://download.pytorch.org/whl/cpu
 #sentence-transformers==5.0.0
+#Important note to use sentence-transformers and huggingface-hub compatible versions of torch is 2.6.0+cpu which only compatible for torchvision 0.21.0+cpu
+#--extra-index-url https://download.pytorch.org/whl/cpu
 huggingface-hub==0.33.4
 
 

@@ -4,6 +4,11 @@ from course_details import COURSES
 from Syllabus_keywords import SYLLABUS_KEYWORDS, EXCLUSION_KEYWORDS
 
 
+COURSE_MAP = {
+    key.lower(): key
+    for key in COURSES.keys()
+    }
+
 def normalize(text: str) -> str:
     print("Normalizing text:", text)
     return re.sub(r"[^a-z0-9 ]", "", text.lower())
@@ -24,7 +29,7 @@ def detect_syllabus_request(user_message: str):
         return None
 
     # 3️⃣ Fuzzy match course name
-    courses = list(COURSES.keys())
+    courses = list(COURSE_MAP.keys())
     match, score, _ = process.extractOne(
         text,
         courses,
@@ -32,14 +37,13 @@ def detect_syllabus_request(user_message: str):
     )
     print(f"Fuzzy match result: {match} with score {score}")
     # 4️⃣ Confidence threshold
-        # 4️⃣ Confidence threshold
-    if score >= 70:
+    if score >= 60:
         return match
 
     return None
 
 def syllabus_response(course, user_id, submitted_users):
-    if not course or course not in COURSES:
+    if not course or course not in COURSE_MAP:
         return {
             "response": "Sorry, I couldn't find that course syllabus. Please check the course name.",
             "need_details": False
@@ -52,7 +56,7 @@ def syllabus_response(course, user_id, submitted_users):
             "course": course
         }
 
-    pdf_file = COURSES[course]
+    pdf_file = COURSE_MAP[course]
     return {
         "response": f"Here is the {course} syllabus 📘:<br><a href='/static/pdfs/{pdf_file}' target='_blank'>Download PDF</a>",
         "need_details": False

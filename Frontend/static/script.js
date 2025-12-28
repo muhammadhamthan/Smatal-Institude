@@ -103,7 +103,7 @@ refreshBtn.addEventListener("click", () => {
     localStorage.setItem("userId", userId)
   }
 
-  fetch("https://appsail-50035450095.development.catalystappsail.in/refresh", {
+  fetch("http://127.0.0.1:8080//refresh", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ user_id: userId }),
@@ -152,7 +152,7 @@ async function sendMessage() {
 
 
 
-    await fetch("https://appsail-50035450095.development.catalystappsail.in/chat", {
+    await fetch("http://127.0.0.1:8080/chat", {
       method: "POST",
       // credentials:"include",
       headers: { "Content-Type": "application/json" },
@@ -212,7 +212,7 @@ function openDetailsForm(course) {
     try {
       console.log("[v0] Submitting form with:", { name, email, phone, course: courseName, user_id })
 
-      const res = await fetch("https://appsail-50035450095.development.catalystappsail.in/submit_details", {
+      const res = await fetch("http://127.0.0.1:8080//submit_details", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phone, course: courseName, user_id }),
@@ -345,34 +345,37 @@ const COURSE_DETAILS = {
     "Digital Marketing covers online promotion strategies. Learn SEO, social media marketing, email campaigns, Google Ads, content marketing, and analytics to grow businesses online.",
 }
 
-document.addEventListener("click", (e) => {
-  const btn = e.target instanceof Element ? e.target.closest(".course-card") : null
+document.addEventListener("click", async (e) => {
+  const btn = e.target.closest(".course-card")
   if (!btn) return
-  const labelEl = btn.querySelector(".course-title")
-  const raw = labelEl
-    ? labelEl.textContent.trim()
-    : (btn.getAttribute("data-prompt") || "").replace(" course details", "").trim()
-  if (!raw) return
 
-  document.getElementById("quick-courses")?.classList.add("hidden")
-  displayMessage(`${raw} course details`, "user-message")
+  const courseName = btn.querySelector(".course-title").textContent.trim()
+  const key = courseName.toLowerCase()
+  const details = COURSE_DETAILS[key]
 
-  const key = raw.toLowerCase()
-  const details = COURSE_DETAILS[key] || "Course details coming soon."
-  const wrapper = document.createElement("div")
-  wrapper.classList.add("bot-message-wrapper")
+  // UI display only
+  displayMessage(`${courseName} course details`, "user-message")
+  displayBotResponse(details)
 
-  const avatar = document.createElement("div")
-  avatar.classList.add("bot-avatar")
-
-  const botResponse = document.createElement("div")
-  botResponse.classList.add("bot-message")
-  botResponse.innerHTML = `<div class="course-detail-title">${raw}</div><div class="course-detail-text">${escapeHtml(details)}</div>`
-
-  wrapper.appendChild(avatar)
-  wrapper.appendChild(botResponse)
-  chatBody.appendChild(wrapper)
+  // 🔥 SILENT MEMORY STORAGE
+  await storeCourseContext(courseName, details)
 })
+
+async function storeCourseContext(courseName, courseDetails) {
+  const userId = localStorage.getItem("userId")
+
+  await fetch("http://127.0.0.1:8080/memory/context", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      user_id: userId,
+      course: courseName,
+      content: courseDetails
+    })
+  })
+}
+
+
 
 // function updateStatusDot() {
 //   const dot = document.querySelector(".status-dot")

@@ -18,6 +18,8 @@ app = Flask(
     __name__
 )
 
+CORS(app)
+
 user_submissions = set()
 #-------------- Flask routes --------------     
 
@@ -35,6 +37,7 @@ def chat():
     print("recideved data",data)
     user_message = data.get('message')
     user_id = data.get('user_id')
+    print("User ID:", user_id)
     
     print("1")
     from langchain_helper import get_qa_chain
@@ -121,6 +124,35 @@ def submit_details():
             "status": "error",
             "response": f"⚠️ Failed to save your details. Please try again later. ({result})"
         })
+        
+@app.route("/memory/context", methods=["POST"])
+def add_context_to_memory():
+    print("123")
+    from langchain.schema import HumanMessage
+    data = request.get_json()
+    user_id = data.get("user_id")
+    course = data.get("course")
+    content = data.get("content")
+
+    if not user_id or not course or not content:
+        return jsonify({"status": "error", "message": "Invalid payload"}), 400
+    
+    print("111")
+    # Load existing memory
+    memory = get_user_memory_from_redis(user_id)
+
+    # ✅ Inject context as a NON-question memory entry
+    memory.chat_memory.messages.append(
+        HumanMessage(
+            content=f"User selected course: {course}. Course context: {content}"
+        )
+    )
+
+    # Save back to Redis
+    save_user_memory_to_redis(user_id, memory)
+
+    return jsonify({"status": "success"})
+
 
         
 

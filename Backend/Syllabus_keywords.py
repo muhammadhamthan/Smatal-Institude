@@ -19,6 +19,35 @@ SYLLABUS_KEYWORDS = {
     "curriculum",
     "curriculum details",
     "learning modules",
+    
+    # Core
+    "fees", "fee", "cost", "price", "charges", "amount",
+
+    # How much
+    "how much", "how much is", "how much does",
+    "what is the fee", "what is the fees", "what is the cost",
+
+    # Payment
+    "payment", "installment", "installments", "emi",
+    "monthly payment", "part payment", "advance payment",
+
+    # Discount & offers
+    "discount", "offer", "offers", "scholarship",
+    "concession", "fee waiver",
+
+    # Refund
+    "refund", "refundable", "refund policy",
+    "cancel", "cancellation", "money back",
+
+    # Admission
+    "admission fee", "registration fee",
+    "enrollment fee", "joining fee",
+
+    # Comparison
+    "cheaper", "expensive", "compare fees",
+
+    # Informal
+    "kitna", "kya fees", "fees bro", "price bro"
 
     # Inclusion / coverage intent
     "what will be taught",
@@ -99,19 +128,7 @@ EXCLUSION_KEYWORDS = {
     "hours",
     "daily time",
 
-    # Fees / cost
-    "fees",
-    "fee",
-    "cost",
-    "price",
-    "payment",
-    "installment",
-    "discount",
-    "offer",
-    "scholarship",
-    "refund",
-
-    # Career / jobs
+# Career / jobs
     "career",
     "job",
     "jobs",

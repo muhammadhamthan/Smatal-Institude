@@ -1,7 +1,9 @@
 import os
 from huggingface_hub import InferenceClient
+from langchain_core.embeddings import Embeddings
 
-class HFInferenceEmbeddings:
+
+class HFInferenceEmbeddings(Embeddings):
     def __init__(self):
         self.client = InferenceClient(
             api_key=os.environ["HF_TOKEN"]
@@ -23,5 +25,5 @@ class HFInferenceEmbeddings:
             for text in texts
         ]
         
-    def __call__(self, text: str):
-        return self.embed_query(text)
+    # def __call__(self, text: str):
+    #     return self.embed_query(text)

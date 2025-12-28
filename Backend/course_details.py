@@ -12,5 +12,6 @@ COURSES = {
     "data analytics": "data_analytics_syllabus.pdf",
     "full stack": "full_stack_syllabus.pdf",
     "cyber security": "cyber_security_syllabus.pdf",
-    "digital marketing": "digital_marketing_syllabus.pdf"
+    "digital marketing": "digital_marketing_syllabus.pdf",
+    "UI and UX": "ui_ux_design_syllabus.pdf",
 }
