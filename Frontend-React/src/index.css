@@ -63,6 +63,10 @@ body {
   transform: translateY(0px) scale(0.99);
 }
 
+.chatbot-button.touched {
+  background: linear-gradient(135deg, rgba(162, 9, 239, 0.2), rgba(162, 9, 239, 0.2));
+}
+
 .chatbot-button-avatar {
   width: 24px;
   /* consistent sizing */
@@ -653,7 +657,7 @@ body {
 }
 
 .icon-btn:hover {
-  background: rgba(255, 255, 255, 0.17);
+  background: rgba(162, 9, 239, 0.1);
   box-shadow: 0 1px 6px rgba(70, 50, 130, 0.18);
   color: var(--primary);
 }
