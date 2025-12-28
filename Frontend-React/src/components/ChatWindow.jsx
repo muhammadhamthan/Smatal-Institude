@@ -11,7 +11,8 @@ const ChatWindow = ({ isOpen, onClose }) => {
     const [userId, setUserId] = useState('')
     const [showQuickCourses, setShowQuickCourses] = useState(true)
     const [detailsForm, setDetailsForm] = useState(null) // { course: '...' }
-    const [pressed, setPressed] = useState(false)
+    const [refreshPressed, setRefreshPressed] = useState(false)
+    const [closePressed, setClosePressed] = useState(false)
     const chatBodyRef = useRef(null)
 
     useEffect(() => {
@@ -167,20 +168,20 @@ const ChatWindow = ({ isOpen, onClose }) => {
                 </div>
                 <div className="chat-controls">
                     <button 
-                        className={`icon-btn ${pressed ? 'pressed' : ''}`} 
+                        className={`icon-btn ${refreshPressed ? 'pressed' : ''}`} 
                         title="Refresh" 
                         onClick={handleRefresh}
-                        onTouchStart={() => setPressed(true)}
-                        onTouchEnd={() => setTimeout(() => { setPressed(false); handleRefresh(); }, 900)}
+                        onTouchStart={() => setRefreshPressed(true)}
+                        onTouchEnd={() => setTimeout(() => { setRefreshPressed(false); handleRefresh(); }, 900)}
                     >
                         <i className="fa-solid fa-rotate"></i>
                     </button>
                     <button 
-                        className={`icon-btn ${pressed ? 'pressed' : ''}`} 
+                        className={`icon-btn ${closePressed ? 'pressed' : ''}`} 
                         title="Close" 
                         onClick={onClose} 
-                        onTouchStart={() => setPressed(true)}
-                        onTouchEnd={() => setTimeout(() => { setPressed(false); onClose(); }, 900)}
+                        onTouchStart={() => setClosePressed(true)}
+                        onTouchEnd={() => setTimeout(() => { setClosePressed(false); onClose(); }, 900)}
                     >
                         <i className="fa-solid fa-xmark"></i>
                     </button>

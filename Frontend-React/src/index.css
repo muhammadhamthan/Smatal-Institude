@@ -63,10 +63,6 @@ body {
   transform: translateY(0px) scale(0.99);
 }
 
-.chatbot-button.pressed {
-  background: rgba(0, 0, 0, 0.4) !important;
-}
-
 .chatbot-button-avatar {
   width: 24px;
   /* consistent sizing */
