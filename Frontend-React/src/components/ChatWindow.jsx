@@ -169,7 +169,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
                     <button 
                         className={`icon-btn ${touchedButton === 'refresh' ? 'touched' : ''}`} 
                         title="Refresh" 
-                        onClick={() => setTimeout(() => handleRefresh(), 1000)}
+                        onClick={() => setTimeout(() => handleRefresh(), 200)}
                         onTouchStart={() => setTouchedButton('refresh')}
                         onTouchEnd={() => setTouchedButton(null)}
                     >
@@ -178,7 +178,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
                     <button 
                         className={`icon-btn ${touchedButton === 'close' ? 'touched' : ''}`} 
                         title="Close" 
-                        onClick={() => setTimeout(() => onClose(), 1000)}
+                        onClick={() => setTimeout(() => onClose(), 200)}
                         onTouchStart={() => setTouchedButton('close')}
                         onTouchEnd={() => setTouchedButton(null)}
                     >
