@@ -649,12 +649,22 @@ body {
   /* Ensures icons show white on your purple header */
   font-size: 1.28em;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .icon-btn:hover {
   background: rgba(255, 255, 255, 0.17);
   box-shadow: 0 1px 6px rgba(70, 50, 130, 0.18);
   color: var(--primary);
+}
+
+/* Disable hover effects on touch devices */
+@media (hover: none) {
+  .icon-btn:hover {
+    background: none;
+    box-shadow: none;
+    color: #fff;
+  }
 }
 
 .icon-btn:active {
