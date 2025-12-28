@@ -171,7 +171,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
                         title="Refresh" 
                         onClick={handleRefresh}
                         onTouchStart={() => setTouchedButton('refresh')}
-                        onTouchEnd={() => { setTouchedButton(null); handleRefresh(); }}
+                        onTouchEnd={() => { handleRefresh(); setTimeout(() => setTouchedButton(null), 200); }}
                     >
                         <i className="fa-solid fa-rotate"></i>
                     </button>
@@ -180,7 +180,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
                         title="Close" 
                         onClick={onClose}
                         onTouchStart={() => setTouchedButton('close')}
-                        onTouchEnd={() => { setTouchedButton(null); onClose(); }}
+                        onTouchEnd={() => { onClose(); setTimeout(() => setTouchedButton(null), 200); }}
                     >
                         <i className="fa-solid fa-xmark"></i>
                     </button>

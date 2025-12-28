@@ -664,7 +664,9 @@ body {
 }
 
 .icon-btn.touched {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(162, 9, 239, 0.4);
+  color: #fff;
+  transform: scale(0.9);
 }
 
 .chat-header .icon-btn {
