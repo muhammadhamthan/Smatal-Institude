@@ -6,9 +6,10 @@ const ChatButton = ({ onClick, isOpen }) => {
             id="chatbot-btn"
             aria-label="Open chatbot"
             onClick={onClick}
+            onTouchStart={onClick}
         >
             <img src="/Logo.jpeg" alt="Samtal Academy Logo" className="chatbot-button-avatar" />
-            <span className="ask">Ask Samtal</span>
+            <span className="ask">Ask Smatal</span>
         </button>
     )
 }

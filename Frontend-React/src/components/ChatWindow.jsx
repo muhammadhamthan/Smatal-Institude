@@ -39,7 +39,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
         setIsBotResponding(false)
 
         try {
-            const response = await axios.post('http://127.0.0.1:8080/refresh', { user_id: userId })
+            const response = await axios.post('https://appsail-50035450095.development.catalystappsail.in/refresh', { user_id: userId })
             console.log("Refresh response:", response.data)
         } catch (error) {
             console.error("Error refreshing memory:", error)
@@ -57,7 +57,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
         setIsBotResponding(true)
 
         try {
-            const response = await axios.post('http://127.0.0.1:8080/chat', {
+            const response = await axios.post('https://appsail-50035450095.development.catalystappsail.in/chat', {
                 message: text,
                 user_id: userId
             })
@@ -121,7 +121,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
     const storeCourseContext = async (courseName, courseDetails) => {
         console.log("Storing context for:", courseName)
         try {
-            const response = await axios.post('http://127.0.0.1:8080/memory/context', {
+            const response = await axios.post('https://appsail-50035450095.development.catalystappsail.in/memory/context', {
                 user_id: userId,
                 course: courseName,
                 content: courseDetails
@@ -135,7 +135,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
     const handleFormSubmit = async (formData) => {
         console.log("Submitting form data:", formData)
         try {
-            const res = await axios.post('http://127.0.0.1:8080/submit_details', {
+            const res = await axios.post('https://appsail-50035450095.development.catalystappsail.in/submit_details', {
                 ...formData,
                 course: detailsForm.course,
                 user_id: userId
@@ -168,7 +168,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
                     <button className="icon-btn" title="Refresh" onClick={handleRefresh}>
                         <i className="fa-solid fa-rotate"></i>
                     </button>
-                    <button className="icon-btn" title="Close" onClick={onClose}>
+                    <button className="icon-btn" title="Close" onClick={onClose} onTouchStart={onClose}>
                         <i className="fa-solid fa-xmark"></i>
                     </button>
                 </div>

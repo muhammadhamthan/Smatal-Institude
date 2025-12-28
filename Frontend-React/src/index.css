@@ -1053,11 +1053,15 @@ body {
     /* Center horizontally */
     border-radius: 18px !important;
     /* Restore rounded corners */
-    display: flex;
+    /* display: flex;  Removed to keep conditional display */
     flex-direction: column;
     box-shadow: 0 16px 40px rgba(2, 6, 23, 0.25);
     z-index: 20000 !important;
     /* Ensure it's on top of everything */
+  }
+
+  .chat-popup.open {
+    display: flex !important;
   }
 
   .chat-header {
@@ -1066,8 +1070,10 @@ body {
   }
 
   .chat-controls .icon-btn {
-    padding: 12px;
+    padding: 16px;
     /* Larger touch target for buttons */
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .details-popup {
