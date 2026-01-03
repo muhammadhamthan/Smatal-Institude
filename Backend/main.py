@@ -13,12 +13,11 @@ from course_details import COURSES
 from google_sheet import append_row_to_sheet
 from redis_cache import get_user_memory_from_redis, save_user_memory_to_redis,redis_key_for_user,redis_client
 from Syllabus_fuzz_detection import detect_syllabus_request as detect_syllabus_request,syllabus_response
+from intent_detection import handle_short_intent
 
 app = Flask(
     __name__
 )
-
-CORS(app)
 
 user_submissions = set()
 #-------------- Flask routes --------------     
@@ -55,6 +54,16 @@ def chat():
     try:
         print("User message received:", user_message)
         
+        short_intent_response = handle_short_intent(
+                user_message,
+                memory,
+                user_submissions,
+                user_id
+        )
+
+        if short_intent_response:
+            return jsonify(short_intent_response)
+        
         print("4.2")
         course = detect_syllabus_request(user_message)
         print("5")
@@ -84,7 +93,7 @@ def chat():
         return jsonify({'response': result})
     except Exception as e:
         print("Error during model invocation:", str(e))
-        return jsonify({'response': "Sorry, I couldn't process your request54444."})
+        return jsonify({'response': "Sorry,There is a backend issus please contact us 96499 64912 for more details."})
     
 @app.route('/refresh', methods=['POST'])
 def refresh_chat():
