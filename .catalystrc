@@ -1,0 +1,30 @@
+{
+  "defaults": {
+    "project": 1,
+    "env": 1
+  },
+  "actives": {
+    "project": 1,
+    "env": 1
+  },
+  "projects": [
+    {
+      "idx": 1,
+      "id": "22761000000046001",
+      "name": "Chatbot",
+      "domain": {
+        "id": "50037580830",
+        "name": "chatbot-60054112184.development"
+      },
+      "timezone": "Asia/Kolkata",
+      "env": [
+        {
+          "idx": 1,
+          "id": "60054112184",
+          "name": "Development",
+          "type": 3
+        }
+      ]
+    }
+  ]
+}

@@ -18,7 +18,7 @@ from intent_detection import handle_short_intent
 app = Flask(
     __name__
 )
-
+CORS(app)
 user_submissions = set()
 #-------------- Flask routes --------------     
 

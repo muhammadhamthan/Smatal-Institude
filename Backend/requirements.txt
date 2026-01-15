@@ -131,6 +131,7 @@ langchain-experimental>=0.3,<0.4
 # langchain-huggingface>=0.1,<0.2
 langchain-groq==0.2.5
 
+#this are the library we needed for to train the model
 #torch==2.8.0+cpu 
 #--extra-index-url https://download.pytorch.org/whl/cpu
 #sentence-transformers==5.0.0
