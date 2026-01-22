@@ -1131,3 +1131,70 @@ body {
     bottom: 100px;
   }
 }
+
+/* Follow-up options buttons */
+.follow-up-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.follow-up-btn {
+  background: #f1f5f9;
+  border: 1px solid transparent;
+  color: #475569;
+  padding: 8px 14px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-grow: 1;
+  text-align: center;
+  max-width: fit-content;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.follow-up-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.follow-up-btn:active {
+  transform: translateY(0);
+}
+
+/* Color variants for follow-up buttons */
+.follow-up-btn.blue {
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+.follow-up-btn.violet {
+  background: #8b5cf6;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+}
+
+.follow-up-btn.emerald {
+  background: #10b981;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+.follow-up-btn.orange {
+  background: #f97316;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+}
+
+.follow-up-btn.slate {
+  background: #64748b;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(100, 116, 139, 0.3);
+}

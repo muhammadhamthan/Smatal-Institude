@@ -40,7 +40,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
         setIsBotResponding(false)
 
         try {
-            const response = await axios.post('https://appsail-50037580830.development.catalystappsail.in/refresh', { user_id: userId })
+            const response = await axios.post(' http://localhost:8080/refresh', { user_id: userId })
             console.log("Refresh response:", response.data)
         } catch (error) {
             console.error("Error refreshing memory:", error)
@@ -58,7 +58,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
         setIsBotResponding(true)
 
         try {
-            const response = await axios.post('https://appsail-50037580830.development.catalystappsail.in/chat', {
+            const response = await axios.post(' http://localhost:8080/chat', {
                 message: text,
                 user_id: userId
             })
@@ -83,23 +83,24 @@ const ChatWindow = ({ isOpen, onClose }) => {
 
     const handleCourseClick = (courseName) => {
         console.log("Course clicked:", courseName)
+        const normalizedCourse = courseName.toLowerCase()
         const COURSE_DETAILS = {
-            "python": "Python is an easy-to-learn programming language used for websites, automation, data analysis, and AI. This course starts from basics and gradually moves to advanced concepts with practical examples.\n👉Would you like to know about course content, duration, fees, or career opportunities?",
-            "cyber security": "Cybersecurity focuses on protecting computers, networks, and data from hackers and cyber threats. This course covers ethical hacking, network security, and how to prevent attacks.\n👉 Would you like to know about course content, duration, fees, or career opportunities?",
-            "data science": "Data Science helps you find useful insights from data using statistics, Python, and machine learning. This course teaches data handling, visualization, and basic AI models.\n👉Would you like to know about course content, duration, fees, or career opportunities?",
-            "ms office": "MS Office teaches essential tools like Word, Excel, PowerPoint, and Outlook used in offices and businesses. This course improves productivity and professional skills.\n👉 Would you like to know about course content, duration, fees, or career opportunities?",
-            "video editing": "Video Editing is about creating and improving videos using tools like Premiere Pro and DaVinci Resolve. This course covers cutting, effects, transitions, and final output.\n👉Would you like to know about course content, duration, fees, or career opportunities?",
-            "tally": "Tally is an accounting software used to manage business finances. This course teaches accounting basics, GST, payroll, and report generation.\n👉Would you like to know about course content, duration, fees, or career opportunities?",
-            "powerbi": "Power BI helps convert raw data into clear charts and dashboards for better decisions. This course teaches data visualization and reporting skills.\n👉Would you like to know about course content, duration, fees, or career opportunities?",
-            "c/c++": "C and C++ are core programming languages used in system software and performance-critical applications. This course covers logic building, problem-solving, and OOP concepts.\n👉Would you like to know about course content, duration, fees, or career opportunities?",
-            "graphic design": "Graphic Design focuses on creating visuals like logos, posters, and social media designs using tools like Photoshop and Figma. This course builds creativity and design skills.\n👉Would you like to know about course content, duration, fees, or career opportunities?",
-            "data analytics": "Data Analytics is about analyzing data to support business decisions. This course teaches Excel, statistics, Python/R, and dashboard creation.\n👉Would you like to know about course content, duration, fees, or career opportunities?",
-            "full stack": "Full Stack Development teaches both front-end and back-end web development. You’ll learn to build complete websites using modern technologies.\n👉Would you like to know about course content, duration, fees, or career opportunities?",
-            "digital marketing": "Digital Marketing teaches online promotion through SEO, social media, ads, and content marketing. This course helps businesses grow online.\n👉 Would you like to know about course content, duration, fees, or career opportunities?",
-            "java": "Java is a powerful programming language widely used in enterprise applications, Android apps, and backend systems. This course covers core Java, OOP concepts, and real-world applications.\n👉 Would you like to know about course content, duration, fees, or career opportunities?"
+            "python": "Python is an easy-to-learn programming language used for websites, automation, data analysis, and AI. This course starts from basics and gradually moves to advanced concepts with practical examples.",
+            "cyber security": "Cybersecurity focuses on protecting computers, networks, and data from hackers and cyber threats. This course covers ethical hacking, network security, and how to prevent attacks.",
+            "data science": "Data Science helps you find useful insights from data using statistics, Python, and machine learning. This course teaches data handling, visualization, and basic AI models.",
+            "ms office": "MS Office teaches essential tools like Word, Excel, PowerPoint, and Outlook used in offices and businesses. This course improves productivity and professional skills.",
+            "video editing": "Video Editing is about creating and improving videos using tools like Premiere Pro and DaVinci Resolve. This course covers cutting, effects, transitions, and final output.",
+            "tally": "Tally is an accounting software used to manage business finances. This course teaches accounting basics, GST, payroll, and report generation.",
+            "powerbi": "Power BI helps convert raw data into clear charts and dashboards for better decisions. This course teaches data visualization and reporting skills.",
+            "c/c++": "C and C++ are core programming languages used in system software and performance-critical applications. This course covers logic building, problem-solving, and OOP concepts.",
+            "graphic design": "Graphic Design focuses on creating visuals like logos, posters, and social media designs using tools like Photoshop and Figma. This course builds creativity and design skills.",
+            "data analytics": "Data Analytics is about analyzing data to support business decisions. This course teaches Excel, statistics, Python/R, and dashboard creation.",
+            "full stack": "Full Stack Development teaches both front-end and back-end web development. You’ll learn to build complete websites using modern technologies.",
+            "digital marketing": "Digital Marketing teaches online promotion through SEO, social media, ads, and content marketing. This course helps businesses grow online.",
+            "java": "Java is a powerful programming language widely used in enterprise applications, Android apps, and backend systems. This course covers core Java, OOP concepts, and real-world applications."
         }
 
-        const details = COURSE_DETAILS[courseName.toLowerCase()] || "Course details coming soon."
+        const details = COURSE_DETAILS[normalizedCourse] || "Course details coming soon."
 
         // Add user message
         const userMsg = { type: 'user', content: `${courseName} course details` }
@@ -111,18 +112,20 @@ const ChatWindow = ({ isOpen, onClose }) => {
             setMessages(prev => [...prev, {
                 type: 'bot',
                 content: `**${courseName}**\n${details}`,
-                isCourseDetail: true
+                isCourseDetail: true,
+                courseName: normalizedCourse,
+                followUpOptions: ["Content", "Duration", "Fees", "Career Opportunities"]
             }])
         }, 500)
 
         // Silent memory storage
-        storeCourseContext(courseName, details)
+        storeCourseContext(normalizedCourse, details)
     }
 
     const storeCourseContext = async (courseName, courseDetails) => {
         console.log("Storing context for:", courseName)
         try {
-            const response = await axios.post('https://appsail-50037580830.development.catalystappsail.in/memory/context', {
+            const response = await axios.post(' http://localhost:8080/memory/context', {
                 user_id: userId,
                 course: courseName,
                 content: courseDetails
@@ -133,10 +136,16 @@ const ChatWindow = ({ isOpen, onClose }) => {
         }
     }
 
+    const handleOptionClick = (courseName, option) => {
+        setDetailsForm({ course: courseName })
+    }
+
+
+
     const handleFormSubmit = async (formData) => {
         console.log("Submitting form data:", formData)
         try {
-            const res = await axios.post('https://appsail-50037580830.development.catalystappsail.in/submit_details', {
+            const res = await axios.post(' http://localhost:8080/submit_details', {
                 ...formData,
                 course: detailsForm.course,
                 user_id: userId
@@ -166,18 +175,18 @@ const ChatWindow = ({ isOpen, onClose }) => {
                     </div>
                 </div>
                 <div className="chat-controls">
-                    <button 
-                        className={`icon-btn ${touchedButton === 'refresh' ? 'touched' : ''}`} 
-                        title="Refresh" 
+                    <button
+                        className={`icon-btn ${touchedButton === 'refresh' ? 'touched' : ''}`}
+                        title="Refresh"
                         onClick={() => setTimeout(() => handleRefresh(), 200)}
                         onTouchStart={() => setTouchedButton('refresh')}
                         onTouchEnd={() => setTouchedButton(null)}
                     >
                         <i className="fa-solid fa-rotate"></i>
                     </button>
-                    <button 
-                        className={`icon-btn ${touchedButton === 'close' ? 'touched' : ''}`} 
-                        title="Close" 
+                    <button
+                        className={`icon-btn ${touchedButton === 'close' ? 'touched' : ''}`}
+                        title="Close"
                         onClick={() => setTimeout(() => onClose(), 200)}
                         onTouchStart={() => setTouchedButton('close')}
                         onTouchEnd={() => setTouchedButton(null)}
@@ -190,7 +199,7 @@ const ChatWindow = ({ isOpen, onClose }) => {
             <div className="chat-body" id="chat-body" ref={chatBodyRef}>
                 {showQuickCourses && <CourseGrid onCourseClick={handleCourseClick} />}
 
-                <MessageList messages={messages} />
+                <MessageList messages={messages} onOptionClick={handleOptionClick} />
 
                 {isBotResponding && (
                     <div className="bot-message-wrapper">

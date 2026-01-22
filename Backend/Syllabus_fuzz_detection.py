@@ -37,7 +37,7 @@ def detect_syllabus_request(user_message: str):
     )
     print(f"Fuzzy match result: {match} with score {score}")
     # 4️⃣ Confidence threshold
-    if score >= 60:
+    if score >= 60: # 60 make the score to hallunicate and giving the tally course so better to use 80 as a lowest value
         return match
 
     return None

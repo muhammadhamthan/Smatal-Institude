@@ -19,8 +19,9 @@ app = Flask(
     __name__
 )
 CORS(app)
+
 user_submissions = set()
-#-------------- Flask routes --------------     
+#-------------- Flask routes --------------    
 
 @app.route("/")
 def health():
